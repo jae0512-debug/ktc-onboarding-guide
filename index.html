@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KTC 베트남 인재 운영 가이드</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+    :root { --orange:#ff6b2c; --ink:#191f28; --sub:#4e5968; --muted:#8b95a1; --line:#f2f4f6; --bg:#f7f8fa; }
+    body { font-family: 'Pretendard', -apple-system, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; letter-spacing: -0.3px; }
+    a { color: inherit; text-decoration: none; }
+
+    /* top bar */
+    nav { position: sticky; top: 0; z-index: 50; background: rgba(247,248,250,.85); backdrop-filter: blur(12px); padding: 15px 24px; display: flex; align-items: center; }
+    .logo { font-weight: 800; font-size: 18px; color: var(--orange); letter-spacing: -0.5px; }
+    .logo b { color: var(--ink); font-weight: 700; }
+
+    /* mobile tab bar */
+    .tabs { position: sticky; top: 52px; z-index: 49; background: rgba(247,248,250,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); display: flex; gap: 2px; padding: 0 12px; overflow-x: auto; scrollbar-width: none; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab { flex-shrink: 0; padding: 13px 12px; font-size: 14px; font-weight: 700; color: var(--muted); border-bottom: 2px solid transparent; white-space: nowrap; cursor: pointer; transition: color .15s; }
+    .tab.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+    /* shell: sidebar + content */
+    .shell { display: block; }
+    .side { display: none; }
+    .main { max-width: 560px; margin: 0 auto; padding: 0 24px; }
+
+    /* hero */
+    .hero { padding: 36px 0 44px; }
+    .hero .eyebrow { font-size: 14px; font-weight: 700; color: var(--orange); margin-bottom: 14px; }
+    .hero h1 { font-size: 33px; font-weight: 800; letter-spacing: -1.2px; line-height: 1.3; }
+    .hero p { font-size: 16px; color: var(--muted); margin-top: 16px; font-weight: 500; }
+    .timebadge { display:inline-flex; align-items:center; gap:7px; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.05); border-radius:20px; padding:9px 16px; font-size:13.5px; font-weight:700; margin-top:22px; color:var(--ink); }
+    .howto { display:flex; gap:8px; margin-top:14px; }
+    .howto .s { flex:1; background:#fff; border-radius:16px; padding:14px 8px; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+    .howto .s .n { font-size:12px; font-weight:800; color:var(--orange); }
+    .howto .s .t { font-size:12.5px; font-weight:700; margin-top:5px; }
+
+    /* section */
+    section { padding: 44px 0; scroll-margin-top: 96px; }
+    section + section { border-top: 1px solid #ebedf0; }
+    .tag { display:inline-block; font-size: 12.5px; font-weight: 800; color: var(--orange); background:#fff2eb; padding:7px 13px; border-radius:20px; letter-spacing: 0.3px; }
+    .h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.9px; margin: 14px 0 22px; line-height: 1.3; }
+    .h2 small { display: block; font-size: 15px; font-weight: 500; color: var(--muted); letter-spacing: -0.3px; margin-top: 8px; }
+    .sub { font-size: 17px; font-weight: 800; letter-spacing: -0.5px; margin: 28px 2px 13px; }
+
+    .card { background: #fff; border-radius: 22px; padding: 22px 24px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+    .card h3 { font-size: 15.5px; font-weight: 800; margin-bottom: 13px; }
+    .cardgrid { display: grid; gap: 12px; }
+    .cardgrid .card { margin-bottom: 0; }
+
+    .rows { background:#fff; border-radius: 22px; padding: 8px 24px; box-shadow: 0 1px 3px rgba(0,0,0,.04); margin-bottom: 12px; }
+    .r { display: flex; gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .r:last-child { border-bottom: none; }
+    .r .em { font-size: 24px; flex-shrink: 0; }
+    .r .rt { font-size: 16px; font-weight: 700; }
+    .r .rd { font-size: 14px; color: var(--muted); font-weight: 500; }
+
+    .pair { background:#fff; border-radius:16px; padding:15px 17px; box-shadow:0 1px 3px rgba(0,0,0,.04); margin-bottom:10px; }
+    .pair .x { font-size:14px; color:#b0b8c1; font-weight:600; }
+    .pair .o { font-size:14.5px; color:var(--ink); font-weight:700; margin-top:7px; }
+
+    .mlist { list-style: none; }
+    .mlist li { font-size: 15px; font-weight: 600; color: var(--sub); padding: 11px 0 11px 26px; position: relative; border-bottom: 1px solid var(--line); }
+    .mlist li:last-child { border-bottom: none; }
+    .mlist li::before { content:""; position:absolute; left:4px; top:18px; width:6px; height:6px; border-radius:50%; background: var(--orange); }
+    .mlist li b { color: var(--ink); font-weight: 700; }
+
+    /* lifecycle timeline */
+    .stage { background:#fff; border-radius:20px; padding:20px 22px; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,.04); border-left:4px solid var(--orange); }
+    .stage .when { display:inline-block; font-size:12.5px; font-weight:800; color:#fff; background:var(--orange); padding:5px 13px; border-radius:20px; }
+    .stage .goal { font-size:14px; color:var(--muted); font-weight:600; margin:11px 0 2px; }
+    .stage ul.mlist { margin-top:6px; }
+    .stage.last { border-left-color:#cbd2d9; }
+    .split { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+    .split .col { border-radius:14px; padding:14px 16px; }
+    .split .renew { background:#eefbf3; }
+    .split .end { background:#f1f3f5; }
+    .split .cl { font-size:13px; font-weight:800; margin-bottom:6px; }
+    .split .renew .cl { color:#15b65a; }
+    .split .end .cl { color:#4e5968; }
+    .split ul { list-style:none; }
+    .split li { font-size:13px; font-weight:600; color:var(--sub); padding:4px 0 4px 14px; position:relative; }
+    .split li::before { content:"·"; position:absolute; left:3px; color:var(--muted); font-weight:800; }
+
+    .tmpl { background:#191f28; color:#dbe2ea; border-radius:18px; padding:18px 20px; font-size:13.5px; line-height:1.8; font-weight:500; margin-bottom:12px; }
+    .tmpl .tl { font-size:12px; font-weight:800; color:#8b95a1; letter-spacing:.5px; margin-bottom:10px; }
+    .tmpl b { color:#fff; font-weight:700; }
+    .tmpl .ex { color:#ffb088; }
+
+    .tbl { width:100%; border-collapse:collapse; background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,.04); margin-bottom:12px; }
+    .tbl th, .tbl td { text-align:left; padding:12px 16px; font-size:13.5px; border-bottom:1px solid var(--line); }
+    .tbl th { background:#fafbfc; font-weight:800; color:var(--muted); font-size:12px; }
+    .tbl tr:last-child td { border-bottom:none; }
+    .tbl td b { color:var(--ink); }
+
+    .tz .lab { display:flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 8px; }
+    .tzbar { position: relative; height: 44px; background: var(--line); border-radius: 14px; overflow: hidden; }
+    .tzbar .kr { position:absolute; top:0; height:50%; left:37.5%; width:37.5%; background:#cfe3ff; }
+    .tzbar .vn { position:absolute; bottom:0; height:50%; left:29%; width:37.5%; background:#ffd9c2; }
+    .tzbar .core { position:absolute; top:0; height:100%; left:33%; width:29%; background: rgba(255,107,44,.18); border-left:2px dashed var(--orange); border-right:2px dashed var(--orange); }
+    .tz .key { display:flex; gap:18px; font-size:13px; color:var(--sub); font-weight:600; margin-top:14px; flex-wrap:wrap; }
+    .tz .key i { font-style:normal; width:11px; height:11px; border-radius:4px; display:inline-block; vertical-align:middle; margin-right:6px; }
+
+    .flow { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .pill { background:var(--bg); border-radius:14px; padding:12px 16px; font-size:14px; font-weight:700; }
+    .arr { color: var(--muted); font-weight:800; }
+
+    .feat { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom:12px; }
+    .feat .f { background:#fff; border-radius:18px; padding:20px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+    .feat .f .em { font-size: 24px; }
+    .feat .f .ft { font-size: 15px; font-weight: 700; margin-top: 10px; }
+    .feat .f .fd { font-size: 13px; color: var(--muted); font-weight: 500; margin-top: 3px; }
+    .vbanner { background:#191f28; color:#fff; border-radius:22px; padding:28px 24px; margin-bottom:12px; }
+    .vbanner .v { font-size:22px; font-weight:800; letter-spacing:-0.5px; }
+    .vbanner .v span { color: var(--orange); }
+    .vbanner p { font-size:14px; color:#b0b8c1; margin-top:8px; font-weight:500; }
+    .vbanner .vstart { display:inline-block; margin-top:18px; background:var(--orange); color:#fff; font-weight:700; font-size:14px; padding:11px 20px; border-radius:13px; }
+
+    .steps { background:#fff; border-radius:20px; padding:6px 22px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+    .steps .st { display:flex; gap:14px; align-items:center; padding:16px 0; border-bottom:1px solid var(--line); }
+    .steps .st:last-child { border-bottom:none; }
+    .steps .sn { width:28px; height:28px; border-radius:9px; background:#fff7f2; color:var(--orange); font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .steps .stt { font-size:15px; font-weight:700; }
+    .steps .std { font-size:13px; color:var(--muted); font-weight:500; }
+
+    .note { font-size:14px; font-weight:600; color: var(--sub); background:#fff7f2; border-radius:16px; padding:16px 18px; margin-top:12px; }
+    .note b { color: var(--orange); }
+
+    /* FAQ */
+    .faq { background:#fff; border-radius:20px; padding:4px 22px; box-shadow:0 1px 3px rgba(0,0,0,.04); margin-bottom:12px; }
+    details { border-bottom:1px solid var(--line); padding:16px 2px; }
+    details:last-child { border-bottom:none; }
+    summary { font-size:15px; font-weight:700; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+    summary::-webkit-details-marker { display:none; }
+    summary::after { content:"+"; color:var(--orange); font-weight:800; font-size:20px; flex-shrink:0; }
+    details[open] summary::after { content:"−"; }
+    details p { font-size:14px; color:var(--sub); font-weight:500; margin-top:10px; line-height:1.6; }
+    .todo { color:#e8590c; font-weight:800; background:#fff0e6; padding:1px 8px; border-radius:6px; font-size:13px; white-space:nowrap; }
+
+    /* worksheet */
+    .hf { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:14px; }
+    .hf .fld { background:#fff; border-radius:14px; padding:11px 15px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+    .hf .fld label { display:block; font-size:11px; font-weight:700; color:var(--muted); margin-bottom:4px; }
+    .hf .fld input { width:100%; border:none; outline:none; font-family:inherit; font-size:14px; font-weight:700; color:var(--ink); background:transparent; letter-spacing:-0.3px; }
+    .hf .fld input::placeholder { color:#cbd2d9; font-weight:500; }
+    .progress { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+    .pbar { flex:1; height:8px; background:var(--line); border-radius:20px; overflow:hidden; }
+    .pfill { height:100%; width:0; background:var(--orange); border-radius:20px; transition:width .35s ease; }
+    .pcount { font-size:13px; font-weight:800; color:var(--orange); white-space:nowrap; }
+    .sheet { background:#fff; border-radius:22px; padding:6px 22px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+    .wi { display:flex; gap:14px; align-items:flex-start; padding:18px 2px; border-bottom:1px solid var(--line); }
+    .wi:last-child { border-bottom:none; }
+    .wchk { width:26px; height:26px; border-radius:9px; border:2px solid #d1d6db; flex-shrink:0; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#fff; font-size:15px; font-weight:800; transition:all .15s; margin-top:2px; }
+    .wi.on .wchk { background:var(--orange); border-color:var(--orange); }
+    .wi.on .wq { color:var(--muted); }
+    .wbody { flex:1; }
+    .wq { font-size:15.5px; font-weight:700; margin-bottom:8px; }
+    .winput { width:100%; border:none; background:var(--bg); border-radius:13px; padding:12px 15px; font-family:inherit; font-size:14.5px; font-weight:600; color:var(--ink); letter-spacing:-0.3px; outline:none; transition:box-shadow .15s; }
+    .winput::placeholder { color:#b8c0c9; font-weight:500; }
+    .winput:focus { box-shadow:0 0 0 2px var(--orange); }
+    .savebtn { width:100%; margin-top:14px; background:var(--ink); color:#fff; border:none; border-radius:16px; padding:15px; font-family:inherit; font-size:15px; font-weight:700; letter-spacing:-0.3px; cursor:pointer; }
+    .savebtn:active { transform:scale(.99); }
+
+    .contact { margin: 40px 0 0; text-align:center; padding: 40px 0; }
+    .contact .c1 { font-size: 20px; font-weight: 800; letter-spacing:-0.5px; }
+    .contact .c2 { font-size: 14px; color: var(--muted); margin: 8px 0 20px; font-weight:500; }
+    .contact a { display:inline-block; background: var(--ink); color:#fff; font-weight:700; font-size:15px; padding:14px 28px; border-radius:14px; }
+
+    /* ===== desktop: 사이드바 + 넓은 본문 ===== */
+    @media (min-width: 900px) {
+      .tabs { display: none; }
+      .shell { display: flex; align-items: flex-start; gap: 28px; max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+      .side { display: block; width: 232px; flex-shrink: 0; position: sticky; top: 64px; align-self: flex-start; padding-top: 36px; }
+      .side .st { font-size: 12px; font-weight: 800; color: var(--muted); letter-spacing: 1px; padding: 0 14px 10px; }
+      .snav { display: block; padding: 11px 14px; border-radius: 12px; font-size: 14.5px; font-weight: 700; color: var(--muted); margin-bottom: 2px; transition: all .15s; }
+      .snav:hover { background: #fff; color: var(--ink); }
+      .snav.active { background: #fff2eb; color: var(--orange); }
+      .snav b { display:inline-block; width:22px; color:#c4cbd2; font-weight:800; }
+      .snav.active b { color: var(--orange); }
+      .main { flex: 1; min-width: 0; max-width: 760px; margin: 0; padding: 0; }
+      .cardgrid { grid-template-columns: 1fr 1fr; }
+      .hero h1 { font-size: 38px; }
+    }
+    @media (min-width: 1200px) { .main { max-width: 820px; } }
+
+    @media (max-width:520px){ .feat,.hf,.howto,.split{grid-template-columns:1fr;} .howto{flex-direction:column;} .hero h1{font-size:28px;} }
+
+    @media print {
+      body { background:#fff; }
+      nav, .tabs, .side, .hero, #hire, #culture, #env, #journey, #welfare, #vteam, .contact, .progress, .savebtn, .note { display:none !important; }
+      .shell { display:block; } .main { max-width:none; }
+      #agree { padding:0; }
+      .sheet { box-shadow:none; border:1px solid #e5e7eb; }
+      .hf .fld { box-shadow:none; border:1px solid #e5e7eb; }
+      .winput { background:#fff !important; border-bottom:1px solid #d1d6db; border-radius:0; padding:10px 2px; }
+      .wi.on .wchk { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    }
+  </style>
+</head>
+<body>
+  <nav><div class="logo">KTC <b>인재 운영 가이드</b></div></nav>
+  <div class="tabs" id="tabs">
+    <a class="tab" href="#hire">고용·EOR</a>
+    <a class="tab" href="#culture">인재 이해</a>
+    <a class="tab" href="#env">원격 환경</a>
+    <a class="tab" href="#journey">온보딩</a>
+    <a class="tab" href="#agree">업무 규칙</a>
+    <a class="tab" href="#welfare">복지</a>
+    <a class="tab" href="#vteam">Vteam</a>
+  </div>
+
+  <div class="shell">
+    <aside class="side">
+      <div class="st">목차</div>
+      <a class="snav" href="#hire"><b>01</b>고용·EOR</a>
+      <a class="snav" href="#culture"><b>02</b>인재 이해</a>
+      <a class="snav" href="#env"><b>03</b>원격 근무 환경</a>
+      <a class="snav" href="#journey"><b>04</b>온보딩 여정</a>
+      <a class="snav" href="#agree"><b>05</b>업무 규칙</a>
+      <a class="snav" href="#welfare"><b>06</b>인재 복지</a>
+      <a class="snav" href="#vteam"><b>07</b>Vteam</a>
+    </aside>
+
+    <main class="main">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="eyebrow">베트남 인재 운영 가이드</div>
+      <h1>채용부터 1년,<br>함께 성장하는 법</h1>
+      <p>KTC는 베트남 IT 인재를 매칭해 드립니다. 고용 구조부터 협업·복지까지, 이 가이드 하나로 시작하세요.</p>
+      <div class="timebadge">⏱ 약 15분 · 인재 채용 직후 함께 보세요</div>
+      <div class="howto">
+        <div class="s"><div class="n">이해</div><div class="t">서비스·인재</div></div>
+        <div class="s"><div class="n">운영</div><div class="t">단계별 여정</div></div>
+        <div class="s"><div class="n">관리</div><div class="t">규칙·복지</div></div>
+      </div>
+    </div>
+
+    <!-- ===== ①: 고용 · 행정 (EOR) ===== -->
+    <section id="hire">
+      <div class="tag">01 · 고용·행정</div>
+      <div class="h2">먼저, 어떻게<br>고용되는 걸까요?<small>해외 인재를 처음 고용할 때 꼭 확인할 것들입니다.</small></div>
+
+      <div class="cardgrid">
+        <div class="card">
+          <h3>🏛️ 고용 형태 — EOR란?</h3>
+          <p style="font-size:14px;color:var(--sub);font-weight:500;margin-bottom:12px;">현지에 법인이 없어도 <b>EOR(Employer of Record)</b> 업체가 인재의 법적 고용주가 되어 근로계약·급여·세금·사회보험·노동법 준수를 대행합니다. 기업은 법인 설립 없이 합법적으로 고용하고 <b>실제 업무 지휘만</b> 담당합니다.</p>
+          <ul class="mlist"><li>KTC를 통한 고용 형태 — <span class="todo">정보 추가 필요</span></li></ul>
+        </div>
+        <div class="card">
+          <h3>💸 급여 · 정산</h3>
+          <ul class="mlist">
+            <li>지급 통화 (VND / USD / KRW) — <span class="todo">정보 추가 필요</span></li>
+            <li>지급일 · 환율 기준 · 송금 방식 — <span class="todo">정보 추가 필요</span></li>
+            <li>정산 방식 (인재 직접 / EOR 일괄) — <span class="todo">정보 추가 필요</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>🧾 세금 · 보험 · 노동법</h3>
+          <p style="font-size:13.5px;color:var(--muted);font-weight:500;margin-bottom:10px;">베트남 소득세·사회보험, 노동법(수습·근로시간·퇴직)은 현지 기준이 적용됩니다. EOR 방식에선 보통 현지 EOR이 원천징수·신고·보험을 처리합니다.</p>
+          <ul class="mlist">
+            <li>세금 · 4대보험 처리 주체 — <span class="todo">정보 추가 필요</span></li>
+            <li>노동법 준수 책임 범위 — <span class="todo">정보 추가 필요</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>📄 계약 · NDA · IP</h3>
+          <ul class="mlist">
+            <li>계약 형태 (근로 / 용역) — <span class="todo">정보 추가 필요</span></li>
+            <li>비밀유지(NDA) · 결과물 IP 귀속 — <span class="todo">정보 추가 필요</span></li>
+            <li>계약서 언어 (한 / 영 / 베) — <span class="todo">정보 추가 필요</span></li>
+          </ul>
+          <div class="note">📌 해외 원격은 <b>IP 귀속·기밀 조항</b>을 계약서에 명시하는 것이 중요합니다.</div>
+        </div>
+        <div class="card">
+          <h3>💰 비용 구조</h3>
+          <p style="font-size:13.5px;color:var(--muted);font-weight:500;margin-bottom:10px;">기업 총비용 = 인재 급여 + 행정 대행(EOR/서비스) 수수료 + 기타.</p>
+          <ul class="mlist">
+            <li>월 급여 범위 — <span class="todo">정보 추가 필요</span></li>
+            <li>EOR / 서비스 수수료 — <span class="todo">정보 추가 필요</span></li>
+            <li>기타 (장비 · 멘토비 등) — <span class="todo">정보 추가 필요</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>⏳ 수습 · 퇴직</h3>
+          <ul class="mlist">
+            <li>수습 기간 · 평가 기준 — <span class="todo">정보 추가 필요</span></li>
+            <li>계약 해지 통보 기간 — <span class="todo">정보 추가 필요</span></li>
+            <li>퇴직 정산 · 인수인계 — <span class="todo">정보 추가 필요</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sub">❓ 자주 묻는 질문</div>
+      <div class="faq">
+        <details><summary>법인이 없어도 베트남 인재를 고용할 수 있나요?</summary><p>네. EOR 방식이면 현지 법인 설립 없이 합법적으로 고용할 수 있습니다. KTC 진행 방식은 <span class="todo">정보 추가 필요</span>.</p></details>
+        <details><summary>급여는 누가, 어떻게 지급하나요?</summary><p><span class="todo">정보 추가 필요</span></p></details>
+        <details><summary>세금과 4대보험은 누가 처리하나요?</summary><p><span class="todo">정보 추가 필요</span> — EOR 방식에선 보통 현지 EOR이 처리합니다.</p></details>
+        <details><summary>결과물의 저작권·IP는 우리 회사 소유인가요?</summary><p>계약서에 IP 귀속을 명시하면 기업 소유로 할 수 있습니다. 표준 계약 기준은 <span class="todo">정보 추가 필요</span>.</p></details>
+        <details><summary>최소 계약 기간이 있나요?</summary><p><span class="todo">정보 추가 필요</span></p></details>
+        <details><summary>중간에 채용을 종료하려면 어떻게 하나요?</summary><p>현지 노동법상 통보 기간이 적용됩니다. 구체 절차는 <span class="todo">정보 추가 필요</span>.</p></details>
+      </div>
+      <div class="note">💬 위 <b>'정보 추가 필요'</b> 항목은 KTC 담당 매니저가 회사 상황에 맞춰 안내해 드립니다.</div>
+    </section>
+
+    <!-- ===== ②: 인재 이해 ===== -->
+    <section id="culture">
+      <div class="tag">02 · 인재 이해</div>
+      <div class="h2">함께 일할 인재,<br>이런 점을 알아두세요<small>일반적 경향이며 개인차가 있습니다. 참고용으로 보세요.</small></div>
+      <div class="rows">
+        <div class="r"><span class="em">🎯</span><div><div class="rt">명확한 지시에 강함</div><div class="rd">구체적으로 줄수록 결과가 정확합니다</div></div></div>
+        <div class="r"><span class="em">🚀</span><div><div class="rt">빠른 습득</div><div class="rd">신기술 적응이 빠릅니다</div></div></div>
+        <div class="r"><span class="em">📈</span><div><div class="rt">성장 동기</div><div class="rd">명확한 목표·커리어 비전에 크게 반응합니다</div></div></div>
+        <div class="r"><span class="em">🤝</span><div><div class="rt">의견은 1:1에서</div><div class="rd">공개 지적보다 개별 대화가 효율적입니다</div></div></div>
+      </div>
+
+      <div class="sub">💬 이렇게 지시하면 일이 빨라집니다</div>
+      <div style="font-size:14px;color:var(--muted);font-weight:500;margin:-4px 2px 13px;">모호한 지시는 추측과 재작업을 부릅니다. 우리 효율을 위한 표현이에요.</div>
+      <div class="pair"><div class="x">✕ "이거 알아서 잘 해주세요"</div><div class="o">✓ "이 기능을 금요일까지, 이런 형태로 만들어 주세요"</div></div>
+      <div class="pair"><div class="x">✕ "왜 이렇게 했어요?"</div><div class="o">✓ "이 부분 의도가 뭐였는지 알려주세요"</div></div>
+      <div class="pair"><div class="x">✕ (여럿 앞에서) "이거 틀렸네요"</div><div class="o">✓ (1:1에서) "이 부분 이렇게 바꿔 주세요"</div></div>
+
+      <div class="note">🗓️ <b>Tet(설, 보통 1~2월)</b>엔 1주 이상 장기 휴무가 일반적입니다. 연초 마감·일정은 미리 감안하세요.</div>
+    </section>
+
+    <!-- ===== ③: 원격 근무 환경 이해 ===== -->
+    <section id="env">
+      <div class="tag">03 · 원격 근무 환경</div>
+      <div class="h2">해외 원격, 이렇게<br>굴러갑니다<small>물리적으로 떨어진 팀을 운영하는 기본 원리입니다.</small></div>
+
+      <div class="sub">🌐 원격 협업 5원칙</div>
+      <div class="card">
+        <ul class="mlist">
+          <li><b>시간보다 결과로</b> — 근무 감시보다 산출물·마감 중심이 원격에선 효율적</li>
+          <li><b>시차는 비동기로 흡수</b> — 문서·코멘트·녹화로 남기면 겹치는 시간이 적어도 굴러갑니다</li>
+          <li><b>고립감 관리</b> — 정기 화상·잡담 채널로 소속감. 원격 이탈의 가장 큰 원인입니다</li>
+          <li><b>보안 기본</b> — 접근 권한 최소화, 기기·계정 분리, 민감정보 통제</li>
+          <li><b>모든 합의는 기록</b> — 구두 대신 텍스트로. 언어·시차 오해를 막습니다</li>
+        </ul>
+      </div>
+
+      <div class="sub">🕐 근무 · 시차</div>
+      <div class="card">
+        <div class="tz">
+          <div class="lab"><span>🇰🇷 한국 09–18시</span><span>🇻🇳 베트남 07–16시</span></div>
+          <div class="tzbar"><div class="kr"></div><div class="vn"></div><div class="core"></div></div>
+          <div class="key"><span><i style="background:#cfe3ff;"></i>한국</span><span><i style="background:#ffd9c2;"></i>베트남</span><span><i style="background:#ffd2bd;"></i>코어타임 10–17시</span></div>
+        </div>
+      </div>
+      <div class="note">⏱️ 베트남은 한국보다 <b>2시간 느립니다</b>. 겹치는 코어타임엔 실시간, 그 외엔 비동기로 운영하세요.</div>
+
+      <div class="sub">💬 소통 채널</div>
+      <table class="tbl">
+        <tr><th>채널</th><th>용도</th><th>예시</th></tr>
+        <tr><td><b>공지</b></td><td>중요 안내</td><td>일정 · 정책 · 휴무</td></tr>
+        <tr><td><b>업무</b></td><td>프로젝트 논의</td><td>태스크 Q&amp;A · 리뷰</td></tr>
+        <tr><td><b>잡담</b></td><td>소속감 · 교류</td><td>일상 · 축하 · 이모지</td></tr>
+      </table>
+
+      <div class="sub">📋 업무 보고</div>
+      <div class="tmpl">
+        <div class="tl">데일리 한 줄 (매일 같은 시간)</div>
+        <b>어제:</b> <span class="ex">___</span><br>
+        <b>오늘:</b> <span class="ex">___</span><br>
+        <b>이슈:</b> <span class="ex">___</span>
+      </div>
+
+      <div class="sub">🔥 이슈 핫라인</div>
+      <div class="card">
+        <div class="flow">
+          <span class="pill">담당 매니저</span><span class="arr">→</span>
+          <span class="pill">팀 리드</span><span class="arr">→</span>
+          <span class="pill" style="background:#191f28;color:#fff;">KTC</span>
+        </div>
+        <div class="note" style="margin-top:14px;">⚡ <b>무엇이 긴급인지</b>, 어느 채널로, 몇 분 내 응답할지 미리 정해두면 대응이 빨라집니다.</div>
+      </div>
+
+      <div class="sub">🗂️ 파일 · 보안</div>
+      <div class="tmpl"><div class="tl">네이밍 규칙 예시</div>프로젝트명 / <b>20260616</b>_기획서_<b>v2</b>.pdf</div>
+      <ul class="mlist card" style="padding:8px 24px;">
+        <li><b>공유 드라이브 한 곳</b>만 사용 (개인 PC 저장 X)</li>
+        <li><b>권한 구분</b> — 편집 / 뷰어, 외부 링크 최소화</li>
+        <li><b>민감 정보</b>는 접근 범위 확인 후 공유</li>
+      </ul>
+    </section>
+
+    <!-- ===== ④: 온보딩 여정 (라이프사이클) ===== -->
+    <section id="journey">
+      <div class="tag">04 · 온보딩 여정</div>
+      <div class="h2">채용 첫날부터<br>1년까지<small>시기별로 무엇을 챙길지 한눈에 보세요.</small></div>
+
+      <div class="stage">
+        <span class="when">1일차 · 온보딩</span>
+        <div class="goal">목표 — 첫날부터 일할 환경 + 핵심 규칙 합의</div>
+        <ul class="mlist">
+          <li>계정·도구·접근 권한 세팅 (첫날 바로 업무 가능하게)</li>
+          <li>역할과 보고 라인 명확히</li>
+          <li><b>업무 규칙 합의서</b> 함께 작성 (→ 05 업무 규칙)</li>
+          <li>환영·팀 소개로 소속감 형성</li>
+        </ul>
+      </div>
+      <div class="stage">
+        <span class="when">1주차</span>
+        <div class="goal">목표 — 기대치 정렬 + 빠른 첫 성공</div>
+        <ul class="mlist">
+          <li>기대치·목표를 1:1로 공유</li>
+          <li>작고 분명한 <b>첫 업무</b> 배정 → 빠른 완료 경험</li>
+          <li>소통·보고 방식 안내 (어디에·언제·어떻게)</li>
+        </ul>
+      </div>
+      <div class="stage">
+        <span class="when">1개월차</span>
+        <div class="goal">목표 — 협업 리듬 정착</div>
+        <ul class="mlist">
+          <li>주 1회 1:1 정례화 ("막힌 점·필요 자료·일정 무리" 점검)</li>
+          <li>피드백 루틴화 — <b>상황 → 행동 → 영향 → 요청</b> 순서로</li>
+          <li>30일 목표 점검, R&amp;R·난이도 조정</li>
+          <li>적응·고립감 체크 (원격 특성상 중요)</li>
+        </ul>
+      </div>
+      <div class="stage">
+        <span class="when">6개월차</span>
+        <div class="goal">목표 — 성과 점검 + 성장·리텐션</div>
+        <ul class="mlist">
+          <li>중간 성과 리뷰</li>
+          <li>역량 개발·교육 기회 논의</li>
+          <li>만족도·복지 점검 (이탈 방지)</li>
+          <li>처우 점검 및 피드백</li>
+        </ul>
+      </div>
+      <div class="stage">
+        <span class="when">1년차</span>
+        <div class="goal">목표 — 연간 평가 + 다음 1년 설계</div>
+        <ul class="mlist">
+          <li>연간 성과 평가</li>
+          <li>커리어·연봉 리뷰</li>
+          <li>계약 연장 사전 논의</li>
+        </ul>
+      </div>
+      <div class="stage last">
+        <span class="when" style="background:#8b95a1;">계약 연장 / 종료</span>
+        <div class="goal">목표 — 깔끔한 마무리 또는 재계약</div>
+        <div class="split">
+          <div class="col renew"><div class="cl">연장</div><ul><li>조건·처우 재협의</li><li>재계약 및 목표 갱신</li></ul></div>
+          <div class="col end"><div class="cl">종료</div><ul><li>업무 인수인계</li><li>계정·권한·자산 회수</li><li>마무리 정산</li><li>KTC에 결과 공유</li></ul></div>
+        </div>
+      </div>
+      <div class="note">📌 각 단계마다 어려움이 있으면 <b>KTC가 함께 조율</b>합니다. 혼자 끌어안지 마세요.</div>
+    </section>
+
+    <!-- ===== ⑤: 업무 규칙 합의서 ===== -->
+    <section id="agree">
+      <div class="tag">05 · 업무 규칙</div>
+      <div class="h2">업무 규칙, 함께 정합니다<small>1일차에 항목별로 합의하고, 저장해 양쪽이 보관하세요.</small></div>
+
+      <div class="hf">
+        <div class="fld"><label>기업명</label><input placeholder="회사 이름"></div>
+        <div class="fld"><label>작성일</label><input placeholder="2026. __. __"></div>
+        <div class="fld"><label>작성자</label><input placeholder="담당자 · 팀원"></div>
+      </div>
+
+      <div class="progress">
+        <div class="pbar"><div class="pfill" id="pfill"></div></div>
+        <div class="pcount" id="pcount">0/11 합의</div>
+      </div>
+
+      <div class="sheet" id="sheet">
+        <div class="wi"><div class="wchk">✓</div><div class="wbody"><div class="wq">⏰ 근무시간 · 코어타임</div><input class="winput" placeholder="예) 한국 09–18시 / 코어타임 10–17시"></div></div>
+        <div class="wi"><div class="wchk">✓</div><div class="wbody"><div class="wq">🏢 근무 형태</div><input class="winput" placeholder="예) 재택 / 주 1회 상주 / 하이브리드"></div></div>
+        <div class="wi"><div class="wchk">✓</div><div class="wbody"><div class="wq">📊 업무 보고 방식 · 주기</div><input class="winput" placeholder="예) 매일 10시 어제·오늘·이슈 / 주간 리포트 금요일"></div></div>
+        <div class="wi"><div class="wchk">✓</div><div class="wbody"><div class="wq">🗓️ 정기 미팅</div><input class="winput" placeholder="예) 매주 화 15시 1:1 화상 미팅"></div></div>
+        <div class="wi"><div class="wchk">✓</div><div class="wbody"><div class="wq">💬 소통 채널 (용도별)</div><input class="winput" placeholder="예) 업무 Vteam, 공지 메일, 긴급 전화"></div></div>
+        <div class="wi"><div class="wchk">✓</div><div class="wbody"><div class="wq">⚡ 응답 기대 시간</div><input class="winput" placeholder="예) 코어타임 내 1시간, 그 외엔 다음 날 오전"></div></div>
+        <div class="wi"><div class="wchk">✓</div><div class="wbody"><div class="wq">🌴 연차 · 휴가 신청 규칙</div><input class="winput" placeholder="예) 최소 1주일 전 / 당일 병가는 오전 중 연락"></div></div>
+        <div class="wi"><div class="wchk">✓</div><div class="wbody"><div class="wq">🛠️ 업무 도구</div><input class="winput" placeholder="예) Vteam, GitHub, Figma, Google Drive"></div></div>
+        <div class="wi"><div class="wchk">✓</div><div class="wbody"><div class="wq">🎯 목표 · 평가</div><input class="winput" placeholder="예) 첫 30/90일 목표, 평가 주기와 기준"></div></div>
+        <div class="wi"><div class="wchk">✓</div><div class="wbody"><div class="wq">🔒 보안 · 파일 관리</div><input class="winput" placeholder="예) 공유 드라이브만 사용, 권한 구분, 외부 공유 제한"></div></div>
+        <div class="wi"><div class="wchk">✓</div><div class="wbody"><div class="wq">📌 기타 운영 규칙</div><input class="winput" placeholder="예) 회의록 공유, 코드리뷰 기준, 잔업·정산 원칙"></div></div>
+      </div>
+      <button class="savebtn" id="savebtn" type="button">🖨️ 업무 규칙 합의서 저장 (PDF · 인쇄)</button>
+      <div class="note" style="margin-top:12px;">📌 항목별로 합의한 뒤 저장해, <b>기업·인재 양측이 한 부씩 보관</b>하세요.</div>
+    </section>
+
+    <!-- ===== ⑥: 인재 복지 ===== -->
+    <section id="welfare">
+      <div class="tag">06 · 인재 복지</div>
+      <div class="h2">잘 챙길수록<br>오래 함께합니다<small>복지·환경은 곧 리텐션입니다. 원격일수록 더 중요해요.</small></div>
+
+      <div class="sub">🖥️ 업무 환경 지원</div>
+      <ul class="mlist card" style="padding:8px 24px;">
+        <li>업무용 <b>장비(노트북·모니터)</b> 또는 구입 보조</li>
+        <li><b>인터넷·재택 환경</b> 보조</li>
+        <li>협업툴 계정 제공 (Vteam 등)</li>
+      </ul>
+
+      <div class="sub">🎁 복지 · 소속감</div>
+      <ul class="mlist card" style="padding:8px 24px;">
+        <li>정기 화상 미팅·팀 이벤트로 <b>소속감</b> 형성</li>
+        <li><b>명절(Tet)·생일·기념일</b> 챙기기</li>
+        <li>잡담 채널로 일상 교류 (고립감 예방)</li>
+      </ul>
+
+      <div class="sub">📚 성장 혜택</div>
+      <ul class="mlist card" style="padding:8px 24px;">
+        <li>교육비·컨퍼런스 지원</li>
+        <li>멘토링·<b>커리어 패스</b> 제시</li>
+        <li>새로운 역할·도전 기회 부여</li>
+      </ul>
+
+      <div class="sub">💰 보상 · 처우</div>
+      <ul class="mlist card" style="padding:8px 24px;">
+        <li><b>급여 지급일·환율·송금 방식</b>을 명확히</li>
+        <li>성과 기반 보상</li>
+        <li>연차·휴가 보장 및 권장</li>
+      </ul>
+      <div class="note">💡 원격 해외 인재는 <b>고립·소외로 이탈</b>하기 쉽습니다. 작은 관심이 장기 근속으로 이어집니다.</div>
+      <div class="note">🎁 KTC 사업에서 제공하는 지원·복지 항목 — <span class="todo">정보 추가 필요</span></div>
+    </section>
+
+    <!-- ===== ⑦: Vteam ===== -->
+    <section id="vteam">
+      <div class="tag">07 · 협업툴</div>
+      <div class="h2">Vteam 하나면<br>충분해요<small>원격 팀을 위한 올인원 워크스페이스</small></div>
+      <div class="vbanner">
+        <div class="v">V<span>team</span></div>
+        <p>채팅·근태·프로젝트·휴가를 한 곳에서. 메시지는 자동 번역돼 각자 모국어로 일해요.</p>
+        <a class="vstart" href="https://vteam-pm.vercel.app" target="_blank" rel="noopener">시작하기 →</a>
+      </div>
+      <div class="feat">
+        <div class="f"><div class="em">💬</div><div class="ft">자동 번역 채팅</div><div class="fd">한·영·베 실시간 번역</div></div>
+        <div class="f"><div class="em">⏰</div><div class="ft">출퇴근 · 근태</div><div class="fd">원격 근무를 투명하게</div></div>
+        <div class="f"><div class="em">📊</div><div class="ft">프로젝트 · 태스크</div><div class="fd">타임라인과 진척 한눈에</div></div>
+        <div class="f"><div class="em">🌴</div><div class="ft">휴가 관리</div><div class="fd">신청부터 승인까지</div></div>
+      </div>
+
+      <div class="sub">🚀 이렇게 시작해요</div>
+      <div class="steps">
+        <div class="st"><div class="sn">1</div><div><div class="stt">Google 계정으로 로그인</div><div class="std">별도 가입 없이 바로 시작</div></div></div>
+        <div class="st"><div class="sn">2</div><div><div class="stt">회사 만들고 팀원 초대</div><div class="std">채용하신 인재에게 초대 링크 전달</div></div></div>
+        <div class="st"><div class="sn">3</div><div><div class="stt">근무시간 · 규칙 설정</div><div class="std">코어타임과 회사 정책을 등록</div></div></div>
+      </div>
+      <div class="note">🖥️ 웹과 데스크톱 앱 모두 지원됩니다.</div>
+    </section>
+
+    <div class="contact">
+      <div class="c1">도움이 필요하면</div>
+      <div class="c2">담당 매니저가 빠르게 도와드립니다</div>
+      <a href="mailto:ktc@likelion.net">ktc@likelion.net</a>
+    </div>
+
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      var sheet = document.getElementById('sheet');
+      var rows = [].slice.call(sheet.querySelectorAll('.wi'));
+      var pfill = document.getElementById('pfill');
+      var pcount = document.getElementById('pcount');
+
+      function update() {
+        var done = rows.filter(function (r) { return r.classList.contains('on'); }).length;
+        pfill.style.width = (done / rows.length * 100) + '%';
+        pcount.textContent = done + '/' + rows.length + ' 합의';
+      }
+      rows.forEach(function (r) {
+        r.querySelector('.wchk').addEventListener('click', function () { r.classList.toggle('on'); update(); });
+      });
+      [].slice.call(document.querySelectorAll('input')).forEach(function (inp) {
+        inp.addEventListener('input', function () { inp.setAttribute('value', inp.value); });
+      });
+      document.getElementById('savebtn').addEventListener('click', function () { window.print(); });
+      update();
+
+      // 목차(사이드바 + 모바일 탭): 스크롤 위치 따라 활성화
+      var links = [].slice.call(document.querySelectorAll('.tab, .snav'));
+      var ids = ['hire','culture','env','journey','agree','welfare','vteam'];
+      function setActive(id) {
+        links.forEach(function (l) { l.classList.toggle('active', l.getAttribute('href') === '#' + id); });
+      }
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) setActive(e.target.id); });
+        }, { rootMargin: '-100px 0px -55% 0px', threshold: 0 });
+        ids.forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
+      }
+    })();
+  </script>
+</body>
+</html>
