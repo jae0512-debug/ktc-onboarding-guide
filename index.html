@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KTC 운영 가이드 — 원격 환경 · 온보딩 · 업무 규칙</title>
+  <title>KTC 운영 가이드 — 인재 이해 · 원격 환경 · 온보딩 · 업무 규칙</title>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
@@ -104,6 +104,16 @@
     .savebtn { width:100%; margin-top:14px; background:var(--ink); color:#fff; border:none; border-radius:16px; padding:15px; font-family:inherit; font-size:15px; font-weight:700; letter-spacing:-0.3px; cursor:pointer; }
     .savebtn:active { transform:scale(.99); }
 
+    .rows { background:#fff; border-radius: 22px; padding: 8px 24px; box-shadow: 0 1px 3px rgba(0,0,0,.04); margin-bottom: 12px; }
+    .r { display: flex; gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .r:last-child { border-bottom: none; }
+    .r .em { font-size: 24px; flex-shrink: 0; }
+    .r .rt { font-size: 16px; font-weight: 700; }
+    .r .rd { font-size: 14px; color: var(--muted); font-weight: 500; }
+    .pair { background:#fff; border-radius:16px; padding:15px 17px; box-shadow:0 1px 3px rgba(0,0,0,.04); margin-bottom:10px; }
+    .pair .x { font-size:14px; color:#b0b8c1; font-weight:600; }
+    .pair .o { font-size:14.5px; color:var(--ink); font-weight:700; margin-top:7px; }
+
     @media (min-width: 900px) {
       .tabs { display: none; }
       .shell { display: flex; align-items: flex-start; gap: 28px; max-width: 1160px; margin: 0 auto; padding: 0 32px; }
@@ -134,6 +144,7 @@
 <body>
   <nav><div class="logo">KTC <b>인재 운영 가이드</b></div></nav>
   <div class="tabs">
+    <a class="tab" href="#culture">인재 이해</a>
     <a class="tab" href="#env">원격 환경</a>
     <a class="tab" href="#journey">온보딩</a>
     <a class="tab" href="#agree">업무 규칙</a>
@@ -142,16 +153,35 @@
   <div class="shell">
     <aside class="side">
       <div class="st">목차</div>
-      <a class="snav" href="#env"><b>01</b>원격 근무 환경</a>
-      <a class="snav" href="#journey"><b>02</b>온보딩 여정</a>
-      <a class="snav" href="#agree"><b>03</b>업무 규칙</a>
+      <a class="snav" href="#culture"><b>01</b>인재 이해</a>
+      <a class="snav" href="#env"><b>02</b>원격 근무 환경</a>
+      <a class="snav" href="#journey"><b>03</b>온보딩 여정</a>
+      <a class="snav" href="#agree"><b>04</b>업무 규칙</a>
     </aside>
 
     <main class="main">
 
+    <!-- ===== ②: 인재 이해 ===== -->
+    <section id="culture">
+      <div class="tag">01 · 인재 이해</div>
+      <div class="h2">함께 일할 인재,<br>이런 점을 알아두세요<small>일반적 경향이며 개인차가 있습니다. 참고용으로 보세요.</small></div>
+      <div class="rows">
+        <div class="r"><span class="em">🎯</span><div><div class="rt">명확한 지시에 강함</div><div class="rd">구체적으로 줄수록 결과가 정확합니다</div></div></div>
+        <div class="r"><span class="em">🚀</span><div><div class="rt">빠른 습득</div><div class="rd">신기술 적응이 빠릅니다</div></div></div>
+        <div class="r"><span class="em">📈</span><div><div class="rt">성장 동기</div><div class="rd">명확한 목표·커리어 비전에 크게 반응합니다</div></div></div>
+        <div class="r"><span class="em">🤝</span><div><div class="rt">의견은 1:1에서</div><div class="rd">공개 지적보다 개별 대화가 효율적입니다</div></div></div>
+      </div>
+      <div class="sub">💬 이렇게 지시하면 일이 빨라집니다</div>
+      <div style="font-size:14px;color:var(--muted);font-weight:500;margin:-4px 2px 13px;">모호한 지시는 추측과 재작업을 부릅니다. 우리 효율을 위한 표현이에요.</div>
+      <div class="pair"><div class="x">✕ "이거 알아서 잘 해주세요"</div><div class="o">✓ "이 기능을 금요일까지, 이런 형태로 만들어 주세요"</div></div>
+      <div class="pair"><div class="x">✕ "왜 이렇게 했어요?"</div><div class="o">✓ "이 부분 의도가 뭐였는지 알려주세요"</div></div>
+      <div class="pair"><div class="x">✕ (여럿 앞에서) "이거 틀렸네요"</div><div class="o">✓ (1:1에서) "이 부분 이렇게 바꿔 주세요"</div></div>
+      <div class="note">🗓️ <b>Tet(설, 보통 1~2월)</b>엔 1주 이상 장기 휴무가 일반적입니다. 연초 마감·일정은 미리 감안하세요.</div>
+    </section>
+
     <!-- ===== ③: 원격 근무 환경 이해 ===== -->
     <section id="env">
-      <div class="tag">01 · 원격 근무 환경</div>
+      <div class="tag">02 · 원격 근무 환경</div>
       <div class="h2">해외 원격, 이렇게<br>굴러갑니다<small>물리적으로 떨어진 팀을 운영하는 기본 원리입니다.</small></div>
 
       <div class="sub">🌐 원격 협업 5원칙</div>
@@ -212,7 +242,7 @@
 
     <!-- ===== ④: 온보딩 여정 (라이프사이클) ===== -->
     <section id="journey">
-      <div class="tag">02 · 온보딩 여정</div>
+      <div class="tag">03 · 온보딩 여정</div>
       <div class="h2">채용 첫날부터<br>1년까지<small>시기별로 무엇을 챙길지 한눈에 보세요.</small></div>
 
       <div class="stage">
@@ -276,7 +306,7 @@
 
     <!-- ===== ⑤: 업무 규칙 합의서 ===== -->
     <section id="agree">
-      <div class="tag">03 · 업무 규칙</div>
+      <div class="tag">04 · 업무 규칙</div>
       <div class="h2">업무 규칙<small>기업이 사전에 업무 규칙을 정리해 입사 전(또는 입사 1일차)에 안내합니다. 항목별로 문서화해 전달합니다.</small></div>
 
       <div class="hf">
@@ -332,7 +362,7 @@
       update();
 
       var links = [].slice.call(document.querySelectorAll('.tab, .snav'));
-      var ids = ['env','journey','agree'];
+      var ids = ['culture','env','journey','agree'];
       function setActive(id) {
         links.forEach(function (l) { l.classList.toggle('active', l.getAttribute('href') === '#' + id); });
       }
